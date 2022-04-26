@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "incremental": true,
-    "target": "es2016",
-    "module": "ES2020",
+    "moduleResolution": "Node",
+    "target": "ES5",
     "baseUrl": "./src",
     "allowJs": true,
     "checkJs": true,
