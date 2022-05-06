@@ -2,7 +2,7 @@
   "compilerOptions": {
     "incremental": true,
     "moduleResolution": "Node",
-    "target": "ES5",
+    "target": "ES2017",
     "baseUrl": "./src",
     "allowJs": true,
     "checkJs": true,
