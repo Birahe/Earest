@@ -43,6 +43,7 @@ export default class Logger implements LoggerInterface {
   }
   writeToFile(message: string, ...args: any[]): void {
     let { fileName } = this;
+    message = args.join(" ");
     const date = new Date();
     const filePath = `${process.cwd()}/${this.logsDir}/${fileName}.log`;
     if (!existsSync(filePath)) {
