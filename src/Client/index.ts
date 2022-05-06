@@ -9,4 +9,9 @@ export default class EarestClient extends Client {
   constructor(params: ClientOptions) {
     super(params);
   }
+
+  public start(): void {
+    this.logger.log("Starting Earest...");
+    this.login(this.config.token);
+  }
 }
