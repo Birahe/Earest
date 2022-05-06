@@ -19,3 +19,5 @@ const client = new EarestClient({
     offset: 10,
   },
 });
+
+client.start();
