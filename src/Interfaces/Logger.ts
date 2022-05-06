@@ -4,5 +4,6 @@ export interface Logger {
   error(message: string, ...args: any[]): void;
   debug(message: string, ...args: any[]): void;
   setFormat(format: string): void;
+  writeToFile(message: string, ...args: any[]): void;
   format: string;
 }
