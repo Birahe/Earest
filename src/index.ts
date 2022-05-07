@@ -1,23 +1,12 @@
 import EarestClient from "./Client";
-import { IntentsBitField, Partials } from "discord.js";
+import { Intents } from "discord.js";
 const client = new EarestClient({
-  intents: Object.values(IntentsBitField.Flags).reduce(
-    (acc, p) => acc | (p as any),
-    0
-  ),
-  partials: [
-    Partials.Channel,
-    Partials.Reaction,
-    Partials.GuildMember,
-    Partials.User,
-    Partials.Message,
-  ],
+  intents: Object.values(Intents.FLAGS).reduce((acc, p) => acc | p, 0),
+  partials: ["CHANNEL", "GUILD_MEMBER", "MESSAGE", "REACTION", "USER"],
   allowedMentions: {
     repliedUser: false,
   },
-  rest: {
-    offset: 10,
-  },
+  restTimeOffset: 10,
 });
 
 client.start();

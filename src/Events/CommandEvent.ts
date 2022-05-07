@@ -5,7 +5,7 @@ const event: Event<"interactionCreate"> = {
   once: true,
   run(client, interaction) {
     if (
-      (interaction.isCommand() || interaction.isContextMenuCommand()) &&
+      (interaction.isCommand() || interaction.isContextMenu()) &&
       client.commandHandler.hasCommand(interaction.commandName)
     ) {
       const command = client.commandHandler.getCommand(interaction.commandName);

@@ -22,8 +22,12 @@
   },
   "homepage": "https://github.com/HestiaN/Earest#readme",
   "dependencies": {
+    "@discord-player/downloader": "^3.0.1",
+    "@discord-player/extractor": "^3.0.2",
+    "@discordjs/opus": "^0.5.3",
     "colors": "^1.4.0",
-    "discord.js": "^14.0.0-dev.1650672498-3617093",
+    "discord-player": "^5.2.3-dev",
+    "discord.js": "^13.6.0",
     "dotenv": "^16.0.0"
   },
   "devDependencies": {

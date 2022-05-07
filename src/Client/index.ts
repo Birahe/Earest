@@ -1,17 +1,24 @@
-import { Config } from "../Interfaces";
-import { Client, ClientOptions } from "discord.js";
+import { Client, ClientOptions, TextChannel } from "discord.js";
 import Logger from "../Logger";
 import { CommandHandler } from "../Handlers";
 import config from "../Config";
 import { readdirSync } from "fs";
 import { join } from "path";
+import { Player } from "discord-player";
+import { Downloader } from "@discord-player/downloader";
+import { Reverbnation, Lyrics } from "@discord-player/extractor";
 
 export default class EarestClient extends Client {
-  public logger: Logger = new Logger(false, "logs");
-  public config: Config = config;
-  public commandHandler: CommandHandler = new CommandHandler(this);
+  public logger = new Logger(false, "logs");
+  public config = config;
+  public commandHandler = new CommandHandler(this);
+  public player = new Player(this);
+  public lyrics = Lyrics.init(config.genius_token);
+
   constructor(params: ClientOptions) {
     super(params);
+    this.player.use("YOUTUBE_DL", Downloader);
+    this.player.use("reverbnation", Reverbnation);
   }
 
   public start(): void {
@@ -28,10 +35,10 @@ export default class EarestClient extends Client {
 
     for (const file of events) {
       const event = require(`../Events/${file}`).default;
-      const eventName = event.name;
-      if (event.once) this.on(eventName, (...args) => event.run(this, ...args));
-      else this.on(eventName, (...args) => event.run(this, ...args));
-      this.logger.log(`Loaded event ${eventName}`);
+      if (event.once)
+        this.on(event.name, (...args) => event.run(this, ...args));
+      else this.on(event.name, (...args) => event.run(this, ...args));
+      this.logger.log(`Loaded event ${event.name}`);
     }
   }
 

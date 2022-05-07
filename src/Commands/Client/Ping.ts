@@ -1,16 +1,10 @@
-import { ApplicationCommandType } from "discord.js";
+import { ApplicationCommandTypes } from "discord.js/typings/enums";
 import { Command } from "./../../Interfaces";
 const command: Command = {
   name: "ping",
-  nameLocalizations: {
-    tr: "gecikme",
-  },
   description: "Shows the latency of bot.",
-  descriptionLocalizations: {
-    tr: "Botun gecikmesini gönderir.",
-  },
   options: [],
-  type: ApplicationCommandType.ChatInput,
+  type: "CHAT_INPUT",
   execute: (client, interaction) => {
     if (!interaction.isCommand()) return;
     interaction.reply({
