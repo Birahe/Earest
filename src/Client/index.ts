@@ -17,6 +17,22 @@ export default class EarestClient extends Client {
   public start(): void {
     this.logger.log("Starting Earest...");
     this.login(this.config.token);
+    this.loadEvents();
+  }
+
+  public loadEvents(): void {
+    this.logger.log("Loading events...");
+    const events = readdirSync(join(__dirname, "../Events")).filter((file) =>
+      file.endsWith(".ts")
+    );
+
+    for (const file of events) {
+      const event = require(`../Events/${file}`).default;
+      const eventName = event.name;
+      if (event.once) this.on(eventName, (...args) => event.run(this, ...args));
+      else this.on(eventName, (...args) => event.run(this, ...args));
+      this.logger.log(`Loaded event ${eventName}`);
+    }
   }
 
   public registerCommands(): void {
