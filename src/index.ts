@@ -21,3 +21,18 @@ const client = new EarestClient({
 });
 
 client.start();
+client.on("ready", () => {
+  client.logger.log(`${client.user!.tag} is ready!`);
+  client.registerCommands();
+});
+client.on("interactionCreate", (interaction) => {
+  if (
+    (interaction.isCommand() || interaction.isContextMenuCommand()) &&
+    client.commandHandler.hasCommand(interaction.commandName)
+  ) {
+    const command = client.commandHandler.getCommand(interaction.commandName);
+    if (command) {
+      command.execute(client, interaction);
+    }
+  }
+});
