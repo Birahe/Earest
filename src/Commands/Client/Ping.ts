@@ -1,5 +1,5 @@
 import { ApplicationCommandTypes } from "discord.js/typings/enums";
-import { Command } from "./../../Interfaces";
+import { Command } from "../../Interfaces";
 const command: Command = {
   name: "ping",
   description: "Shows the latency of bot.",

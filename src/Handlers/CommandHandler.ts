@@ -28,7 +28,6 @@ export class CommandHandler implements ICommandHandler {
     return this.commands.find((c) => c.name === name) || null;
   }
   public hasCommand(name: string): boolean {
-    if (this.commands.find((c) => c.name === name)) return true;
-    return false;
+    return !!this.commands.find((c) => c.name === name);
   }
 }
