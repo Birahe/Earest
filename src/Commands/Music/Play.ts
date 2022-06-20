@@ -42,15 +42,15 @@ const command: Command = {
                     })
             ]
         })
-        if (!queue) queue = await client.player.createQueue(interaction.guildId, {
+        if (!queue) queue = await client.player.createQueue(interaction.guildId!, {
             autoSelfDeaf: true,
             initialVolume: 50,
             leaveOnEmpty: true,
             metadata: {
-                channel: interaction.channel,
+                channel: interaction.guild!.channels.cache.get(interaction.channelId),
                 requester: interaction.member
             }
-        })
+        }).connect(channel)
         interaction.reply({
             embeds: [
                 new MessageEmbed()
@@ -62,13 +62,13 @@ const command: Command = {
                     })
             ]
         })
-        await queue.connect(channel)
         const res = await client.player.search(query, {
             requestedBy: interaction.user,
             searchEngine: QueryType.AUTO,
         })
 
-        await queue.play(res.tracks[0])
+        await queue.addTrack(res.tracks[0])
+        if(!queue.playing) queue.play();
     },
 };
 
